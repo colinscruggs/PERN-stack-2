@@ -1,14 +1,15 @@
-import { useEffect, useState } from 'react';
-import { RestaurantAPI } from '../api/RestaurantApi';
+import { useContext, useEffect } from 'react';
+import { RestaurantsAPI } from '../api/RestaurantsApi';
+import { RestaurantsContext } from '../context/RestaurantsContext';
 import RestaurantList from '../components/RestaurantList';
 
 const HomePage = () => {
-    const [restaurants, setRestaurants] = useState([]);
+    const { restaurants, setRestaurants } = useContext(RestaurantsContext);
 
     useEffect(() => {
         const fetchRestaurants = async () => {
             try {
-                const response = await RestaurantAPI.getAll();
+                const response = await RestaurantsAPI.getAll();
                 setRestaurants(response);
             } catch (err) {
                 console.error((err as Error).message);
@@ -16,10 +17,11 @@ const HomePage = () => {
         };
 
         fetchRestaurants();
-    }, []);
+    }, [setRestaurants]);
 
     return (
         <>
+            {/* TODO: add AddRestaurant component */}
             <RestaurantList restaurants={restaurants} />
         </>
     );

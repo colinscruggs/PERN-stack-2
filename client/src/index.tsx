@@ -7,6 +7,7 @@ import HomePage from './routes/HomePage';
 import RestaurantDetailPage from './routes/RestaurantDetailPage';
 import RestaurantUpdatePage from './routes/RestaurantUpdatePage';
 import ErrorPage from './routes/ErrorPage';
+import { RestaurantsContextProvider } from './context/RestaurantsContext';
 
 import './styles/index.css';
 
@@ -35,6 +36,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <React.StrictMode>
-        <RouterProvider router={router} />
+        <RestaurantsContextProvider>
+            <RouterProvider router={router} />
+        </RestaurantsContextProvider>
     </React.StrictMode>,
 );
